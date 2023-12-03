@@ -1,0 +1,86 @@
+class Machine:
+    
+    def __init__(self, water, milk, beans, cups, money):
+        self.water = water
+        self.milk = milk
+        self.beans = beans
+        self.cups = cups
+        self.money = money
+    def status(self):
+        print(f'The coffee machine has:\n{self.water} ml of water\n{self.milk} ml of milk\n{self.beans} g of coffee beans\n{self.cups} disposable cups\n${self.money} of money\n')
+    def action(self):
+        while True:
+            self.act = input('Write action (buy, fill, take, remaining, exit):\n')
+            
+            if self.act == 'buy':
+                self.choice = input('What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:\n')
+                if self.choice == '1':
+                    if (self.water >= 250) and (self.beans >= 16):
+                        self.water = self.water - 250
+                        self.beans = self.beans - 16
+                        self.money = self.money + 4
+                        self.cups = self.cups - 1
+                        print('I have enough resources, making you a coffee!')
+                    else:
+                        if self.water < 250:
+                            print('Sorry, not enough water!')
+                        elif self.beans < 16:
+                            print('Sorry, not enough beans!')
+                        
+                elif self.choice == '2':
+                    if (self.water >= 350) and (self.beans >= 20) and (self.milk >= 75):
+                        self.water = self.water - 350
+                        self.milk = self.milk - 75
+                        self.beans = self.beans - 20
+                        self.money = self.money + 7
+                        self.cups = self.cups - 1
+                        print('I have enough resources, making you a coffee!')
+                    else:
+                        if self.water < 350:
+                            print('Sorry, not enough water!')
+                        elif self.beans < 20:
+                            print('Sorry, not enough beans!')
+                        elif self.milk < 75:
+                            print('Sorry, not enough milk!')
+                        
+                elif self.choice == '3':  
+                    if (self.water >= 200) and (self.beans >= 12) and (self.milk >= 100):
+                        self.water = self.water - 200
+                        self.milk = self.milk - 100
+                        self.beans = self.beans - 12
+                        self.money = self.money + 6
+                        self.cups = self.cups - 1
+                        print('I have enough resources, making you a coffee!')
+                    else:
+                        if self.water < 200:
+                            print('Sorry, not enough water!')
+                        elif self.beans < 12:
+                            print('Sorry, not enough beans!')
+                        elif self.milk < 100:
+                            print('Sorry, not enough milk!')
+                elif self.choice =="back":
+                    pass
+                    
+                    
+            elif self.act == 'fill':
+                self.water_add = int(input('Write how many ml of water you want to add:\n')) 
+                self.water = self.water_add + self.water
+                self.milk_add = int(input('Write how many ml of milk you want to add:\n'))
+                self.milk = self.milk_add + self.milk
+                self.beans_add = int(input('Write how many grams of coffee beans you want to add:\n'))
+                self.beans = self.beans_add + self.beans
+                self.cups_add = int(input('Write how many disposable cups you want to add:\n'))
+                self.cups = self.cups_add + self.cups
+        
+            elif self.act == 'take':
+                print('I gave you ${}'.format(self.money))
+                self.money = 0
+        
+            elif self.act == 'remaining':
+                self.status()
+            
+            elif self.act == 'exit':
+                break
+
+coffe_machine = Machine(400, 540, 120, 9, 550)
+coffe_machine.action()
